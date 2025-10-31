@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+
+  <data name="begin" xml:space="preserve"><value>Игрок №1 вводит первое слово (длина - от 8 до 30 символов):</value></data>
+  <data name="select" xml:space="preserve"><value>Выбран русский язык.</value></data>
+  <data name="press" xml:space="preserve"><value>Нажмите любую клавишу, чтобы продолжить.</value></data>
+  <data name="errlen" xml:space="preserve"><value>Задано слово неверной длины!</value></data>
+  <data name="errsym" xml:space="preserve"><value>Слово содержит неверные символы!</value></data>
+  <data name="ctrue" xml:space="preserve"><value>Слово подходит под условие!</value></data>
+  <data name="cfalse" xml:space="preserve"><value>Но при этом слово повторяется!</value></data>
+  <data name="cwrong" xml:space="preserve"><value>Задание не выполнено!</value></data>
+  <data name="tech" xml:space="preserve"><value>Победил игрок №2, так как игрок №1 ввёл неверное значение!</value></data>
+  <data name="turn" xml:space="preserve"><value>Ход №</value></data>
+  <data name="pl" xml:space="preserve"><value>. Игрок №</value></data>
+  <data name="input" xml:space="preserve"><value> вводит слово: </value></data>
+  <data name="timeout" xml:space="preserve"><value>Время вышло!</value></data>
+  <data name="victory" xml:space="preserve"><value>Победил игрок №</value></data>
+</root>

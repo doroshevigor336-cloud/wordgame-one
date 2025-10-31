@@ -9,6 +9,11 @@
       "ConsoleApp1/1.0.0": {
         "runtime": {
           "ConsoleApp1.dll": {}
+        },
+        "resources": {
+          "ru/ConsoleApp1.resources.dll": {
+            "locale": "ru"
+          }
         }
       }
     }

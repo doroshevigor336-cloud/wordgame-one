@@ -12,3 +12,10 @@ D:\stage\ConsoleApp1\obj\Debug\net8.0\refint\ConsoleApp1.dll
 D:\stage\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.pdb
 D:\stage\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 D:\stage\ConsoleApp1\obj\Debug\net8.0\ref\ConsoleApp1.dll
+d:\stage\ConsoleApp1\bin\Debug\net8.0\ru\ConsoleApp1.resources.dll
+d:\stage\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.Resources.Resources.resources
+d:\stage\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.Resources.Resources.ru.resources
+d:\stage\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.csproj.GenerateResource.cache
+d:\stage\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.sourcelink.json
+d:\stage\ConsoleApp1\obj\Debug\net8.0\ru\ConsoleApp1.resources.cs
+d:\stage\ConsoleApp1\obj\Debug\net8.0\ru\ConsoleApp1.resources.dll

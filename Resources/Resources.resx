@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+
+  <data name="begin" xml:space="preserve"><value>Player 1 enters the first word (expected length - from 8 to 30 symbols):</value></data>
+  <data name="select" xml:space="preserve"><value>English language was chosen.</value></data>
+  <data name="press" xml:space="preserve"><value>Press any button to continue.</value></data>
+  <data name="errlen" xml:space="preserve"><value>Incorrect length!</value></data>
+  <data name="errsym" xml:space="preserve"><value>Incorrect symbols!</value></data>
+  <data name="ctrue" xml:space="preserve"><value>The word is correct!</value></data>
+  <data name="cfalse" xml:space="preserve"><value>But the word has already been used!</value></data>
+  <data name="cwrong" xml:space="preserve"><value>The word is incorrect!</value></data>
+  <data name="tech" xml:space="preserve"><value>Player 2 won, because Player 1 used wrong inputs!</value></data>
+  <data name="turn" xml:space="preserve"><value>Turn </value></data>
+  <data name="pl" xml:space="preserve"><value>. Player </value></data>
+  <data name="input" xml:space="preserve"><value> enters a word: </value></data>
+  <data name="timeout" xml:space="preserve"><value>Time's up!</value></data>
+  <data name="victory" xml:space="preserve"><value>Victory goes to Player </value></data>
+</root>

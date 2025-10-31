@@ -33,7 +33,7 @@ class Program
         }
 
         //The dictionary is connected here
-        var dict = new DictLocalize(lang);
+        IntLocalize dict = new ResxLocalize(lang);
 
         //Correct values are used here (depends on localization)
         char firstletter;
