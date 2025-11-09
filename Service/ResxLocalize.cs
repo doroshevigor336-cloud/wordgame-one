@@ -4,9 +4,9 @@ using ConsoleApp1.Interface;
 
 namespace ConsoleApp1.Services;
 
-public class ResxLocalize : IntLocalize
+public class ResxLocalize : ILocalize
 {
-    private readonly ResourceManager manager;
+    private readonly ResourceManager _resourceManager;
 
     //Language is chosen here
     public ResxLocalize(string lang)
@@ -23,7 +23,7 @@ public class ResxLocalize : IntLocalize
         }
 
         CultureInfo.CurrentUICulture = culture;
-        manager = new ResourceManager("ConsoleApp1.Resources.Resources", typeof(ResxLocalize).Assembly);
+        _resourceManager = new ResourceManager("ConsoleApp1.Resources.Resources", typeof(ResxLocalize).Assembly);
     }
 
     //Access to a string via key
@@ -31,7 +31,7 @@ public class ResxLocalize : IntLocalize
     {
         get
         {
-            string? value = manager.GetString(key);
+            string? value = _resourceManager.GetString(key);
 
             if (value != null)
             {

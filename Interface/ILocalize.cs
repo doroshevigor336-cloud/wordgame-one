@@ -1,6 +1,6 @@
 namespace ConsoleApp1.Interface;
 
-public interface IntLocalize
+public interface ILocalize
 {
     string this[string key] { get; }
 }

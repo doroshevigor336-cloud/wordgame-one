@@ -3,22 +3,22 @@ using ConsoleApp1.Interface;
 
 namespace ConsoleApp1.Services;
 
-public class ConsInput : IntInput
+public class ConsoleInput : IInput
 {
     //'timesup' is used to check if time has elapsed
-    private bool timesup = false;
+    private bool _timeIsUp = false;
 
     public async Task<string?> WordInput(int timeoutMs)
     {
-        timesup = false;
+        _timeIsUp = false;
 
         //Timer setup
         //'timeoutMs' equals the amount of time (15000 ms by default)
 
-        var timer1 = new System.Timers.Timer(timeoutMs);
-        timer1.Elapsed += OnTimeElapsed;
-        timer1.AutoReset = false;
-        timer1.Start();
+        var timer = new System.Timers.Timer(timeoutMs);
+        timer.Elapsed += OnTimeElapsed;
+        timer.AutoReset = false;
+        timer.Start();
 
         //'Task.Run()' is used to end the game during input if time has elapsed
 
@@ -27,14 +27,14 @@ public class ConsInput : IntInput
 
         //Stops the timer and resets it
 
-        timer1.Stop();
-        timer1.Dispose();
+        timer.Stop();
+        timer.Dispose();
 
         //When 'Task.Run()' is completed, checks if there is no more time left
 
         if (ends == input)
         {
-            if (!timesup)
+            if (!_timeIsUp)
             {
                 return await input;
             }
@@ -53,6 +53,6 @@ public class ConsInput : IntInput
     //This event tells if there is no more time left
     private void OnTimeElapsed(object? sender, ElapsedEventArgs e)
     {
-        timesup = true;
+        _timeIsUp = true;
     }
 }

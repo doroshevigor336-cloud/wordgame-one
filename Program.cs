@@ -7,12 +7,12 @@ class Program
 {
     static async Task Main()
     {
-        var output = new ConsOutput();
-        var input = new ConsInput();
+        var output = new ConsoleOutput();
+        var input = new ConsoleInput();
 
         output.Clear();
 
-        string lang = "";
+        string language = "";
 
         //Localization depends on user's choice, the game won't start if the input is wrong
         while (true)
@@ -21,8 +21,8 @@ class Program
             output.WriteLine("Напишите 'ru' для поддержки русского языка");
             output.WriteLine("Type 'en' for english language support");
 
-            lang = Console.ReadLine();
-            if (lang == "ru" || lang == "en")
+            language = Console.ReadLine();
+            if (language == "ru" || language == "en")
                 break;
 
             //If the input is wrong, the game requests the input again
@@ -33,21 +33,21 @@ class Program
         }
 
         //The dictionary is connected here
-        IntLocalize dict = new ResxLocalize(lang);
+        ILocalize dict = new ResxLocalize(language);
 
         //Correct values are used here (depends on localization)
-        char firstletter;
-        int mas;
+        char firstLetter;
+        int alphabetSize;
 
-        if (lang == "ru")
+        if (language == "ru")
         {
-            firstletter = 'а';
-            mas = 33;
+            firstLetter = 'а';
+            alphabetSize = 33;
         }
         else
         {
-            firstletter = 'a';
-            mas = 26;
+            firstLetter = 'a';
+            alphabetSize = 26;
         }
 
         output.WriteLine(dict["select"]);
@@ -57,16 +57,16 @@ class Program
 
         //The game starts with the first word
         output.WriteLine(dict["begin"]);
-        string? firstword = Console.ReadLine()?.Trim().ToLower();
+        string? firstWord = Console.ReadLine()?.Trim().ToLower();
 
         //Checks if the first word has a correct length
-        if (string.IsNullOrWhiteSpace(firstword))
+        if (string.IsNullOrWhiteSpace(firstWord))
         {
             output.WriteLine(dict["errlen"]);
             output.WriteLine(dict["tech"]);
             return;
         }
-        else if (firstword.Length < 8 || firstword.Length > 30)
+        else if (firstWord.Length < 8 || firstWord.Length > 30)
         {
             output.WriteLine(dict["errlen"]);
             output.WriteLine(dict["tech"]);
@@ -75,10 +75,10 @@ class Program
 
         //Checks if the word has correct symbols
         bool valid = true;
-        foreach (char c in firstword)
+        foreach (char c in firstWord)
         {
-            int nomer = c - firstletter;
-            if (nomer < 0 || nomer >= mas)
+            int nomer = c - firstLetter;
+            if (nomer < 0 || nomer >= alphabetSize)
             {
                 valid = false;
                 break;
@@ -92,8 +92,8 @@ class Program
             return;
         }
 
-        var checker = new WordCheck(firstword, firstletter, mas);
-        var game = new GameCore(input, output, dict, checker, firstword, firstletter, mas);
+        var checker = new WordCheck(firstWord, firstLetter, alphabetSize);
+        var game = new GameCore(input, output, dict, checker, firstWord, firstLetter, alphabetSize);
         await game.Run();
     }
 }

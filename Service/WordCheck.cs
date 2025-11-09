@@ -2,49 +2,49 @@ namespace ConsoleApp1.Services;
 
 public class WordCheck
 {
-    private readonly int[] arr;
-    private readonly char firstletter;
-    private readonly int mas;
+    private readonly int[] _letterCount;
+    private readonly char _firstletter;
+    private readonly int _alphabetSize;
 
-    public WordCheck(string firstword, char firstletter, int mas)
+    public WordCheck(string firstword, char firstletter, int alphabetSize)
     {
-        this.firstletter = firstletter;
-        this.mas = mas;
-        arr = new int[mas];
+        _firstletter = firstletter;
+        _alphabetSize = alphabetSize;
+        _letterCount = new int[alphabetSize];
 
         //Every used letter in the word adds 1 to  
         foreach (char c in firstword)
         {
-            //firstletter - the first leter of the alphabet (depends on a game localization)
-            int nomer = c - firstletter;
+            //_firstletter - the first leter of the alphabet (depends on a game localization)
+            int index = c - _firstletter;
 
             //Adds 1 to the elements in the array
-            if (nomer >= 0 && nomer < mas)
-                arr[nomer]++;
+            if (index >= 0 && index < _alphabetSize)
+                _letterCount[index]++;
         }
     }
 
     public bool Check(string secondword)
     {
         //Array for counting the amount of times when each letter of the alphabet is used in the word
-        //'mas' - alphabet size (depends on localization)
-        int[] arrcheck = new int[mas];
+        //'_alphabetSize' - alphabet size (depends on localization)
+        int[] checkCount = new int[_alphabetSize];
 
-        //'rule' tells if the word is allowed or not
-        bool rule = true;
+        //'isValid' tells if the word is allowed or not
+        bool isValid = true;
 
         //Counts the amount of times when each letter is used
         foreach (char c in secondword)
         {
-            //'firstletter' - the first letter of the alphabet (depends on localization)
-            int nomer = c - firstletter;
+            //'_firstletter' - the first letter of the alphabet (depends on localization)
+            int index = c - _firstletter;
 
             //checks if the symbol is a correct letter and adds 1 to the array element
-            if (nomer >= 0 && nomer < mas)
-                arrcheck[nomer]++;
+            if (index >= 0 && index < _alphabetSize)
+                checkCount[index]++;
             else
             {
-                rule = false;
+                isValid = false;
                 break;
             }
         } 
@@ -52,16 +52,16 @@ public class WordCheck
         //Comparison between tho arrays to check how many letters are used
 
         //The number of used letters must be equal or lower than the number of the same letters in the first word
-        for (int i = 0; i < mas; i++)
+        for (int i = 0; i < _alphabetSize; i++)
         {
-            if (arr[i] < arrcheck[i])
+            if (_letterCount[i] < checkCount[i])
             {
-                rule = false;
+                isValid = false;
                 break;
             }
         }
 
-        //'rule' tells if the word is allowed or not
-        return rule;    
+        //'isValid' tells if the word is allowed or not
+        return isValid;    
     }        
 }

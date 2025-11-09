@@ -1,6 +1,6 @@
 namespace ConsoleApp1.Interface;
 
-public interface IntInput
+public interface IInput
 {
     Task<string?> WordInput(int timeoutMs);
 }

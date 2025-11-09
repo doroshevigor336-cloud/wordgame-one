@@ -7,37 +7,37 @@ namespace ConsoleApp1.Services;
 
 public class GameCore
 {
-    private readonly IntInput input;
-    private readonly IntOutput output;
-    private readonly IntLocalize dict;
-    private readonly WordCheck checker;
-    private readonly string firstword;
-    private readonly char firstletter;
-    private readonly int mas;
+    private readonly IInput _input;
+    private readonly IOutput _output;
+    private readonly ILocalize _localization;
+    private readonly WordCheck _checker;
+    private readonly string _firstword;
+    private readonly char _firstletter;
+    private readonly int _mas;
 
-    public GameCore(IntInput input, IntOutput output, IntLocalize dict, WordCheck checker, string firstword, char firstletter, int mas)
+    public GameCore(IInput input, IOutput output, ILocalize localization, WordCheck checker, string firstword, char firstletter, int mas)
     {
-        this.input = input;
-        this.output = output;
-        this.dict = dict;
-        this.checker = checker;
-        this.firstword = firstword;
-        this.firstletter = firstletter;
-        this.mas = mas;
+        _input = input;
+        _output = output;
+        _localization = localization;
+        _checker = checker;
+        _firstword = firstword;
+        _firstletter = firstletter;
+        _mas = mas;
     }
 
     public async Task Run()
     {
     //This clears the console
-    output.WriteLine(dict["press"]);
-    output.WaitForKey();
-    output.Clear();
+    _output.WriteLine(_localization["press"]);
+    _output.WaitForKey();
+    _output.Clear();
 
     //Starts counting turns from 2
     int count = 2;
 
     //Creates a list to check if the word has been used or not
-    List<string> words = new List<string> {firstword};
+    List<string> words = new List<string> {_firstword};
 
     //A loop for new words
     while (true)
@@ -53,13 +53,13 @@ public class GameCore
             player = 1;
         }
 
-        output.WriteLine(dict["turn"] + count + dict["pl"] + player + dict["input"]);
+        _output.WriteLine(_localization["turn"] + count + _localization["pl"] + player + _localization["input"]);
 
         //Timer for 15 seconds
-        string? secondword = await input.WordInput(15000);
+        string? secondword = await _input.WordInput(15000);
         if (secondword == null)
         {
-            output.WriteLine(dict["timeout"]);
+            _output.WriteLine(_localization["timeout"]);
             break;
         }
 
@@ -68,16 +68,16 @@ public class GameCore
         count++;
 
         //Checks if the word is correct
-        bool rule = checker.Check(secondword);
+        bool rule = _checker.Check(secondword);
 
         //Checks if the word has already been used
         if (rule)
         {
-            output.WriteLine(dict["ctrue"]);
+            _output.WriteLine(_localization["ctrue"]);
 
             if (words.Contains(secondword))
             {
-                output.WriteLine(dict["cfalse"]);
+                _output.WriteLine(_localization["cfalse"]);
                 break;
             }
             else
@@ -86,14 +86,14 @@ public class GameCore
                 words.Add(secondword);
 
                 //Clears the console
-                output.WriteLine(dict["press"]);
-                output.WaitForKey();
-                output.Clear();
+                _output.WriteLine(_localization["press"]);
+                _output.WaitForKey();
+                _output.Clear();
             }
         }
         else
         {
-            output.WriteLine(dict["cwrong"]);
+            _output.WriteLine(_localization["cwrong"]);
             break;
         }
     }
@@ -110,7 +110,7 @@ public class GameCore
     }
 
     //Tells who the winner is and ends the game
-    output.WriteLine(dict["victory"] + winner + "!");
+    _output.WriteLine(_localization["victory"] + winner + "!");
     }
 
 }   
