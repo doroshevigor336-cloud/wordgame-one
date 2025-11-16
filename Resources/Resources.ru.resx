@@ -19,4 +19,9 @@
   <data name="input" xml:space="preserve"><value> вводит слово: </value></data>
   <data name="timeout" xml:space="preserve"><value>Время вышло!</value></data>
   <data name="victory" xml:space="preserve"><value>Победил игрок №</value></data>
+  <data name="stopGame" xml:space="preserve"><value>Игра приостановлена.</value></data>
+  <data name="words" xml:space="preserve"><value>Список использованных в этой игре слов:</value></data>
+  <data name="players" xml:space="preserve"><value>Текущие игроки:</value></data>
+  <data name="allPlayers" xml:space="preserve"><value>Все игроки:</value></data>
+  <data name="wins" xml:space="preserve"><value> - побед: </value></data>
 </root>

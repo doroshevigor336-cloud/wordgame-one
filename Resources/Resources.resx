@@ -19,4 +19,9 @@
   <data name="input" xml:space="preserve"><value> enters a word: </value></data>
   <data name="timeout" xml:space="preserve"><value>Time's up!</value></data>
   <data name="victory" xml:space="preserve"><value>Victory goes to Player </value></data>
+  <data name="stopGame" xml:space="preserve"><value>Game paused.</value></data>
+  <data name="words" xml:space="preserve"><value>List of used words:</value></data>
+  <data name="players" xml:space="preserve"><value>Players:</value></data>
+  <data name="allPlayers" xml:space="preserve"><value>All players:</value></data>
+  <data name="wins" xml:space="preserve"><value> - score: </value></data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ConsoleApp1.Interface;
 using ConsoleApp1.Services;
@@ -10,6 +11,48 @@ class Program
         var output = new ConsoleOutput();
         var input = new ConsoleInput();
 
+        var playerScore = new PlayerScore();
+        var allPlayers = playerScore.LoadPlayers();
+
+        var stateService = new GameStateService();
+        var savedState = stateService.LoadState();
+
+        //Checks if there was an unfinished game
+        if (savedState != null)
+        {
+            int winnerIndex = (savedState.CurrentTurn % 2 == 0) ? 0 : 1;
+
+            //Adds a player to the list if he is not already there
+            foreach (var savedPlayer in savedState.Players)
+            {
+                playerScore.GetOrCreatePlayer(savedPlayer.Name, allPlayers);
+            }
+
+            //Finds a winner in the list
+            Player winner = allPlayers.Find(p => p.Name.Equals(savedState.Players[winnerIndex].Name, StringComparison.OrdinalIgnoreCase));
+            if (winner != null)
+            {
+                playerScore.AddWin(winner);
+            }
+
+            //Saves data
+            playerScore.SavePlayers(allPlayers);
+
+            stateService.ClearState();
+        }
+
+
+        output.Clear();
+
+        //Gets data about names and score
+        //If player doesn't exist, creates a new one
+        Console.WriteLine("Игрок 1/Player 1:");
+        string name1 = Console.ReadLine();
+        Player player1 = playerScore.GetOrCreatePlayer(name1, allPlayers);
+
+        Console.WriteLine("Игрок 2/Player 2:");
+        string name2 = Console.ReadLine();
+        Player player2 = playerScore.GetOrCreatePlayer(name2, allPlayers);
         output.Clear();
 
         string language = "";
@@ -56,44 +99,71 @@ class Program
         output.Clear();
 
         //The game starts with the first word
-        output.WriteLine(dict["begin"]);
-        string? firstWord = Console.ReadLine()?.Trim().ToLower();
+        string? firstWord = null;
 
-        //Checks if the first word has a correct length
-        if (string.IsNullOrWhiteSpace(firstWord))
+        while (true)
         {
-            output.WriteLine(dict["errlen"]);
-            output.WriteLine(dict["tech"]);
-            return;
-        }
-        else if (firstWord.Length < 8 || firstWord.Length > 30)
-        {
-            output.WriteLine(dict["errlen"]);
-            output.WriteLine(dict["tech"]);
-            return;
-        }
+            output.WriteLine(dict["begin"]);
+            firstWord = Console.ReadLine()?.Trim().ToLower();
 
-        //Checks if the word has correct symbols
-        bool valid = true;
-        foreach (char c in firstWord)
-        {
-            int nomer = c - firstLetter;
-            if (nomer < 0 || nomer >= alphabetSize)
+            //Checks if the first word has a correct length
+            if (string.IsNullOrWhiteSpace(firstWord))
             {
-                valid = false;
-                break;
+                output.WriteLine(dict["errlen"]);
+                output.WriteLine(dict["press"]);
+                output.WaitForKey();
+                output.Clear();
+                continue;
             }
-        }
+            else if (firstWord.Length < 8 || firstWord.Length > 30)
+            {
+                output.WriteLine(dict["errlen"]);
+                output.WriteLine(dict["press"]);
+                output.WaitForKey();
+                output.Clear();
+                continue;
+            }
 
-        if (!valid)
-        {
-            output.WriteLine(dict["errsym"]);
-            output.WriteLine(dict["tech"]);
-            return;
+            //Checks if the word has correct symbols
+            bool valid = true;
+            foreach (char c in firstWord)
+            {
+                int nomer = c - firstLetter;
+                if (nomer < 0 || nomer >= alphabetSize)
+                {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (!valid)
+            {
+                output.WriteLine(dict["errsym"]);
+                output.WriteLine(dict["press"]);
+                output.WaitForKey();
+                output.Clear();
+                continue;
+            }
+
+            break;
         }
 
         var checker = new WordCheck(firstWord, firstLetter, alphabetSize);
-        var game = new GameCore(input, output, dict, checker, firstWord, firstLetter, alphabetSize);
+        var game = new GameCore(
+            input,
+            output,
+            dict,
+            checker,
+            firstWord,
+            firstLetter,
+            alphabetSize,
+            playerScore,
+            new List<Player> { player1, player2 }
+        );
+
         await game.Run();
+
+        //Saves new data about players
+        playerScore.SavePlayers(allPlayers);
     }
 }
