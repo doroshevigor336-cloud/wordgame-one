@@ -16,7 +16,7 @@ public class GameCore
     private readonly int _mas;
     private readonly PlayerScore _playerScore;
     private readonly List<Player> _players;
-    private readonly GameStateService _stateService = new(); // сервис для сохранения состояния
+    private readonly GameStateService _stateService = new();
 
     public GameCore(
         IInput input,
@@ -53,7 +53,6 @@ public class GameCore
         //Creates a list to check if the word has been used or not
         List<string> words = new List<string> { _firstword };
 
-        //Сохраняем начальное состояние сразу при старте
         _stateService.SaveState(count, words, _players);
 
         //A loop for new words
@@ -77,7 +76,7 @@ public class GameCore
             if (secondword == null)
             {
                 _output.WriteLine(_localization["timeout"]);
-                _stateService.SaveState(count, words, _players); // сохраняем при таймауте
+                _stateService.SaveState(count, words, _players);
                 break;
             }
 
@@ -153,7 +152,7 @@ public class GameCore
                 if (words.Contains(secondword))
                 {
                     _output.WriteLine(_localization["cfalse"]);
-                    _stateService.SaveState(count, words, _players); // сохраняем при повторе
+                    _stateService.SaveState(count, words, _players);
                     break;
                 }
                 else
@@ -161,7 +160,6 @@ public class GameCore
                     //Adds the word to the list
                     words.Add(secondword);
 
-                    //Сохраняем состояние после успешного хода
                     _stateService.SaveState(count, words, _players);
 
                     //Clears the console
@@ -173,7 +171,7 @@ public class GameCore
             else
             {
                 _output.WriteLine(_localization["cwrong"]);
-                _stateService.SaveState(count, words, _players); // сохраняем при ошибке
+                _stateService.SaveState(count, words, _players);
                 break;
             }
         }
