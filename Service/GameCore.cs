@@ -139,8 +139,6 @@ public class GameCore
                 continue;
             }
 
-            count++;
-
             //Checks if the word is correct
             bool rule = _checker.Check(secondword);
 
@@ -159,6 +157,7 @@ public class GameCore
                 {
                     //Adds the word to the list
                     words.Add(secondword);
+                    count++;
 
                     _stateService.SaveState(count, words, _players);
 
@@ -180,11 +179,11 @@ public class GameCore
         int winnerIndex;
         if (count % 2 == 1)
         {
-            winnerIndex = 1;
+            winnerIndex = 2;
         }
         else
         {
-            winnerIndex = 2;
+            winnerIndex = 1;
         }
 
         Player winner = _players[winnerIndex - 1];
